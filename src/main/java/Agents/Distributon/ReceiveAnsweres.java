@@ -31,10 +31,7 @@ public class ReceiveAnsweres extends Behaviour {
             log.info(getAgent().getLocalName() + " получил ставку от " + receive.getSender());
             String[] auctionMessages = receive.getContent().split(",");
             producerMap.put(auctionMessages[0],auctionMessages[1]);
-            if(producerMap.size()>1){
 
-
-            }
 
 
         }

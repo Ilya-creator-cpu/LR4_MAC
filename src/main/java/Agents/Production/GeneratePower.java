@@ -57,6 +57,7 @@ public class GeneratePower extends Behaviour {
                 double C1 = 19.907;
                 double C2 = -1.292;
                 double C3 = 0.024;
+                log.info(content[2] + " Час в котором вырабатывается энергия");
                 if (5 < Double.parseDouble(content[2]) && Double.parseDouble(content[2]) < 19) {
                     energy = C0 + C1 * Double.parseDouble(content[2]) + C2 * Double.parseDouble(content[2]) * Double.parseDouble(content[2])
                             + C3 * Double.parseDouble(content[2]) * Double.parseDouble(content[2]) * Double.parseDouble(content[2]);
@@ -64,7 +65,7 @@ public class GeneratePower extends Behaviour {
                     firstPrice = minPrice * 2;
 
                 } else {
-                    energy = 0.000001;
+                    energy = 1;
                     minPrice = 1000 / energy;
                     firstPrice = minPrice * 2;
 

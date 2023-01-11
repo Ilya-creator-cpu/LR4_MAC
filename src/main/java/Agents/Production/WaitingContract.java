@@ -9,29 +9,30 @@ import lombok.extern.slf4j.Slf4j;
 public class WaitingContract extends Behaviour {
 
     boolean finish = false;
+
     @Override
     public void action() {
 
-        // log.info("Ожидаем контракта");
+         log.info("Ожидаем контракта");
         MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.CONFIRM);
         ACLMessage receive = getAgent().receive(mt);
         if (receive != null) {
            log.info( getAgent().getLocalName() + " получил сообщение " + receive.getContent() + "хочет приобрести"
                     + receive.getSender().getLocalName());
 
-            String[] skoka= receive.getContent().split(",");
+            String[] amount= receive.getContent().split(",");
 
             switch (getAgent().getLocalName()) {
                 case "TermalStation":
-                    if (Double.parseDouble(skoka[0]) <  TermalEnergy.getTermalEnergy()){
-                        TermalEnergy.setTermalEnergy(TermalEnergy.getTermalEnergy() - Double.parseDouble(skoka[0]));
+                    if (Double.parseDouble(amount[0]) <  TermalEnergy.getTermalEnergy()){
+                        TermalEnergy.setTermalEnergy(TermalEnergy.getTermalEnergy() - Double.parseDouble(amount[0]));
                         ACLMessage msg = new ACLMessage(ACLMessage.INFORM_IF);                                     //отправка  первого сообщ в тоПик
-                        msg.setContent(skoka[1]);
+                        msg.setContent(amount[1]);
                         msg.addReceiver(new AID(receive.getSender().getLocalName(), false));
                         getAgent().send(msg);
-                        log.info( getAgent().getLocalName() + " ПРОДАЮ ЭНЕРГИЮ ЭТОМУ ЧЕЛУ "+ receive.getSender().getLocalName()
-                                +  "вот стока энергии ему нада" +
-                                receive.getContent() + " ВОТ СТОКА У МЕНЯ ОСТАЛОСЬ "+ TermalEnergy.getTermalEnergy());
+                        log.info( getAgent().getLocalName() + " продал энергию "+ receive.getSender().getLocalName()
+                                +  "в количестве" +
+                                receive.getContent() + " имеется "+ TermalEnergy.getTermalEnergy());
 
 
                     } else{
@@ -39,21 +40,21 @@ public class WaitingContract extends Behaviour {
                         msg.setContent("");
                         msg.addReceiver(new AID(receive.getSender().getLocalName(), false));
                         getAgent().send(msg);
-                        log.info(getAgent().getLocalName() + "  НЕ ПРОДАЮ ЭНЕРГИЮ ЭТОМУ ЧЕЛУ "+ receive.getSender().getLocalName()
+                        log.info(getAgent().getLocalName() + "  энергия не была продана "+ receive.getSender().getLocalName()
                                 +  "вот стока энергии ему нада" +
-                                receive.getContent() + " ВОТ СТОКА У МЕНЯ ОСТАЛОСЬ "+ TermalEnergy.getTermalEnergy());
+                                receive.getContent() + " количество оставшейся энергии "+ TermalEnergy.getTermalEnergy());
                     }
                     break;
                 case "SunStation":
-                    if (Double.parseDouble(skoka[0] ) <  SunEnergy.getSunEnergy()){
-                        SunEnergy.setSunEnergy(SunEnergy.getSunEnergy() - Double.parseDouble(skoka[0]));
+                    if (Double.parseDouble(amount[0] ) <  SunEnergy.getSunEnergy()){
+                        SunEnergy.setSunEnergy(SunEnergy.getSunEnergy() - Double.parseDouble(amount[0]));
                         ACLMessage msg = new ACLMessage(ACLMessage.INFORM_IF);                                     //отправка  первого сообщ в тоПик
-                        msg.setContent(skoka[1]);
+                        msg.setContent(amount[1]);
                         msg.addReceiver(new AID(receive.getSender().getLocalName(), false));
                         getAgent().send(msg);
-                        log.info( getAgent().getLocalName() + " ПРОДАЮ ЭНЕРГИЮ ЭТОМУ ЧЕЛУ "+ receive.getSender().getLocalName()
-                                +  "вот стока энергии ему нада" +
-                                receive.getContent() + " ВОТ СТОКА У МЕНЯ ОСТАЛОСЬ "+ SunEnergy.getSunEnergy());
+                        log.info( getAgent().getLocalName() + " продал энергию "+ receive.getSender().getLocalName()
+                                +  "в количестве" +
+                                receive.getContent() + " имеется "+ TermalEnergy.getTermalEnergy());
 
 
 
@@ -62,22 +63,22 @@ public class WaitingContract extends Behaviour {
                         msg.setContent("");
                         msg.addReceiver(new AID(receive.getSender().getLocalName(), false));
                         getAgent().send(msg);
-                        log.info(getAgent().getLocalName() + "  НЕ ПРОДАЮ ЭНЕРГИЮ ЭТОМУ ЧЕЛУ "+ receive.getSender().getLocalName()
+                        log.info(getAgent().getLocalName() + "  энергия не была продана "+ receive.getSender().getLocalName()
                                 +  "вот стока энергии ему нада" +
-                                receive.getContent() + " ВОТ СТОКА У МЕНЯ ОСТАЛОСЬ "+ SunEnergy.getSunEnergy());
+                                receive.getContent() + " количество оставшейся энергии "+ TermalEnergy.getTermalEnergy());
 
                     }
                     break;
                 case "WindStation":
-                    if (Double.parseDouble(skoka[0] ) <  WindEnergy.getWindEnergy()){
-                        WindEnergy.setWindEnergy(WindEnergy.getWindEnergy() - Double.parseDouble(skoka[0]));
+                    if (Double.parseDouble(amount[0] ) <  WindEnergy.getWindEnergy()){
+                        WindEnergy.setWindEnergy(WindEnergy.getWindEnergy() - Double.parseDouble(amount[0]));
                         ACLMessage msg = new ACLMessage(ACLMessage.INFORM_IF);                                     //отправка  первого сообщ в тоПик
-                        msg.setContent(skoka[1]);
+                        msg.setContent(amount[1]);
                         msg.addReceiver(new AID(receive.getSender().getLocalName(), false));
                         getAgent().send(msg);
-                        log.info( getAgent().getLocalName() + " ПРОДАЮ ЭНЕРГИЮ ЭТОМУ ЧЕЛУ "+ receive.getSender().getLocalName()
-                                +  "вот стока энергии ему нада" +
-                                receive.getContent() + " ВОТ СТОКА У МЕНЯ ОСТАЛОСЬ "+ WindEnergy.getWindEnergy());
+                        log.info( getAgent().getLocalName() + " продал энергию "+ receive.getSender().getLocalName()
+                                +  "в количестве" +
+                                receive.getContent() + " имеется "+ TermalEnergy.getTermalEnergy());
 
 
 
@@ -86,16 +87,15 @@ public class WaitingContract extends Behaviour {
                         msg.setContent("");
                         msg.addReceiver(new AID(receive.getSender().getLocalName(), false));
                         getAgent().send(msg);
-                        log.info(getAgent().getLocalName() + "  НЕ ПРОДАЮ ЭНЕРГИЮ ЭТОМУ ЧЕЛУ "+ receive.getSender().getLocalName()
+                        log.info(getAgent().getLocalName() + "  энергия не была продана "+ receive.getSender().getLocalName()
                                 +  "вот стока энергии ему нада" +
-                                receive.getContent() + " ВОТ СТОКА У МЕНЯ ОСТАЛОСЬ "+ WindEnergy.getWindEnergy());
+                                receive.getContent() + " количество оставшейся энергии "+ TermalEnergy.getTermalEnergy());
                     }
                     break;
 
-
             }
 
-        }
+        } else log.info("CONFIRM не был получен");
     }
 
 

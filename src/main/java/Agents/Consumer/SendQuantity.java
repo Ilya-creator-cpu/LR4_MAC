@@ -47,8 +47,9 @@ public class SendQuantity extends TickerBehaviour {
         }
 
         getAgent().send(msg);
-        log.info("Запрос отправлен" + "текущий час" + hour);
+        log.info("Запрос отправлен");
         hour++;
-
+        if (hour == 25)
+            hour = 1;
     }
 }

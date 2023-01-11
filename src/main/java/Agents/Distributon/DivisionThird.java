@@ -32,7 +32,7 @@ public class DivisionThird extends Behaviour {
                 log.info(getAgent().getLocalName() + " получил согласие");
 
                 ACLMessage msg = new ACLMessage(ACLMessage.NOT_UNDERSTOOD);                                     //отправка  первого сообщ в тоПик
-                msg.setContent("ПОЛОВИНУ"+","+receive.getContent());
+                msg.setContent("halth"+","+receive.getContent());
                 msg.addReceiver(new AID(whichAgent, false));
                 getAgent().send(msg);
 
@@ -45,7 +45,7 @@ public class DivisionThird extends Behaviour {
                 cnt++;
                 if(cnt==2){
                     ACLMessage msg = new ACLMessage(ACLMessage.NOT_UNDERSTOOD);                                     //отправка  первого сообщ в тоПик
-                    msg.setContent("Тебе энергию не купили :(");
+                    msg.setContent("Без энергии");
                     msg.addReceiver(new AID(whichAgent, false));
                     getAgent().send(msg);
                     agreement = true;

@@ -27,8 +27,6 @@ public class OneShotBehaviourr extends OneShotBehaviour {
         message.setContent(information);
         message.addReceiver(new AID(distributer, false));
         getAgent().send(message);
-
-
         i++;
     }
 }

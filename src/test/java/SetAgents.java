@@ -1,23 +1,19 @@
-import Agents.Consumer.Consumer;
-import Agents.Distributon.Distributor;
-import Agents.Production.Producer;
+import Bilet_3.*;
 import jade.core.ProfileImpl;
 import jade.core.Runtime;
 import jade.core.behaviours.Behaviour;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
-import jade.wrapper.StaleProxyException;
+import lombok.SneakyThrows;
 
 import java.util.List;
 
 public class SetAgents {
-    private AgentContainer mainContainer;
-
-
+    protected AgentContainer mainContainer;
 
     public void startJade(List<String> services) {
         ProfileImpl profile = new ProfileImpl();
-        profile.setParameter("gui", "true");
+     //   profile.setParameter("gui", "true");
         StringBuilder sb = new StringBuilder();
 
         services.forEach(el -> sb.append(el).append(";"));
@@ -27,39 +23,31 @@ public class SetAgents {
         mainContainer = Runtime.instance().createMainContainer(profile);
     }
 
-    public void createConsumer(String name, Behaviour...behaviours) {
-        try {
-            AgentController newAgent = mainContainer.createNewAgent(name, Consumer.class.getName(),behaviours);
-            newAgent.start();
-        } catch (StaleProxyException e) {
-            e.printStackTrace();
-        }
+    @SneakyThrows
+    public void createAgreeAgent(String name, Behaviour...behaviours) {
+        AgentController newAgent =  mainContainer.createNewAgent(name, AgentAgree.class.getName(), behaviours);
+        newAgent.start();
+    }
+    @SneakyThrows
+    public void createDenyAgent(String name, Behaviour...behaviours) {
+        AgentController newAgent =  mainContainer.createNewAgent(name, AgentDeny.class.getName(), behaviours);
+        newAgent.start();
+    }
+    @SneakyThrows
+    public void createIgnoreAgent(String name, Behaviour...behaviours) {
+        AgentController newAgent =  mainContainer.createNewAgent(name, AgentIgnore.class.getName(), behaviours);
+        newAgent.start();
+    }
+    @SneakyThrows
+    public void createBuyerAgent(String name,Behaviour...behaviours) {
+        AgentController newAgent = mainContainer.createNewAgent(name, AgentBuyer.class.getName(), behaviours);
+        newAgent.start();
+
     }
 
-    public void createConsumer_new(String name, Behaviour...behaviours) {
-        try {
-            AgentController newAgent = mainContainer.createNewAgent(name, TestConsumer.class.getName() ,behaviours);
-            newAgent.start();
-        } catch (StaleProxyException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void createDistributor(String name, Behaviour...behaviours) {
-        try {
-            AgentController newAgent = mainContainer.createNewAgent(name, Distributor.class.getName(), behaviours);
-            newAgent.start();
-        } catch (StaleProxyException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void createProducer(String name, Behaviour...behaviours) {
-        try {
-            AgentController newAgent = mainContainer.createNewAgent(name, Producer.class.getName(), behaviours);
-            newAgent.start();
-        } catch (StaleProxyException e) {
-            e.printStackTrace();
-        }
+    @SneakyThrows
+    public void createTestAgent(String name, Behaviour...behaviours) {
+        AgentController newAgent = mainContainer.createNewAgent(name, TestAgent.class.getName(), behaviours);
+        newAgent.start();
     }
 }

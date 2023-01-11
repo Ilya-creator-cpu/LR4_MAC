@@ -4,7 +4,7 @@
 <Power100percent>6.8</Power100percent>
 
     <powers>
-        <power>20000</power>
+        <power>20</power>
     </powers>
     <powers>
         <power>20</power>
@@ -16,7 +16,7 @@
         <power>10</power>
     </powers>
     <powers>
-        <power>1000000</power>
+        <power>10</power>
     </powers>
     <powers>
         <power>20</power>

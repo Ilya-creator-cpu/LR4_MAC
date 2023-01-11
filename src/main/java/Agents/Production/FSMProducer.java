@@ -13,7 +13,7 @@ public class FSMProducer extends FSMBehaviour {
         String LAST_STATE = "last state";
         String PHARALLEL_WAITING_CONTRACT = " pharallel waiting contract";
 
-        registerFirstState(new SendPrice(getAgent(),5000,topicName, ability, firstPrice,minPrice), SEND_FIRST_STAVKA);
+       // registerFirstState(new SendPrice(getAgent(),5000,topicName, ability, firstPrice,minPrice), SEND_FIRST_STAVKA);
 //         registerState(new AuctionProducer(firstBindPower,minPricePower,firstPricePower,topicName), AUCTION_PRODUCER);
         registerState(new AuctionProducer(minPrice,topicName, firstPrice), AUCTION_PRODUCER);
 
@@ -24,7 +24,7 @@ public class FSMProducer extends FSMBehaviour {
             @SneakyThrows
             @Override
             public void action() {
-                log.info("Фсм окончил работу");
+                log.info("End of hour");
             }
         }, LAST_STATE);
 

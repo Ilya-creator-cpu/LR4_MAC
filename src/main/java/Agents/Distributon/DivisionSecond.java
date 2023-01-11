@@ -66,14 +66,14 @@ public class DivisionSecond extends Behaviour {
         msg1.setContent((Double.parseDouble(neededPower2)/2 )+ ","+minPrice1);
         msg1.addReceiver(new AID(winner1, false));
         getAgent().send(msg1);
-        log.info("ОТПРАВЛЯЮ ЕЩЕ СООБЩЕНИЕ И ПОКУПКЕ первое " +getAgent().getLocalName() + " ему " +winner1 + " вот стока энергии " + (Double.parseDouble(neededPower2)/2));
+        log.info(getAgent().getLocalName() + " ему " +winner1 + " вот столько энергии " + (Double.parseDouble(neededPower2)/2));
 
 
         ACLMessage msg2 = new ACLMessage(ACLMessage.CONFIRM);                                     //отправка  первого сообщ в тоПик
         msg2.setContent((Double.parseDouble(neededPower2)/2 )+ ","+minPrice2);
         msg2.addReceiver(new AID(winner2, false));
         getAgent().send(msg2);
-        log.info("ОТПРАВЛЯЮ ЕЩЕ СООБЩЕНИЕ И ПОКУПКЕ второе" +getAgent().getLocalName() + " ему " +winner2 + " вот стока энергии " + (Double.parseDouble(neededPower2)/2));
+        log.info(getAgent().getLocalName() + " ему " +winner2 + " вот столько энергии " + (Double.parseDouble(neededPower2)/2));
         finish = true;
     }
 

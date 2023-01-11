@@ -19,20 +19,20 @@ public class Report extends Behaviour {
     @Override
     public void action() {
 
-        MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.NOT_UNDERSTOOD);
+        MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
         ACLMessage receive = getAgent().receive(mt);
 
         if (receive != null){
             log.info(getAgent().getLocalName() + " получил сообщение " + receive.getContent());
-            String[] results222 = receive.getContent().split(",");
-            if(Double.parseDouble(results222[1])>max_price){
+            String[] results = receive.getContent().split(",");
+            if(Double.parseDouble(results[1])>max_price){
                 onEndvalue = 0;
                 finish=true;
             } else{
                 onEndvalue = 1;
                 finish = true;
             }
-            if(Objects.equals(results222[0], "halth")){
+            if(Objects.equals(results[0], "halth")){
                 onEndvalue = 2;
                 finish=true;
             }
@@ -44,7 +44,7 @@ public class Report extends Behaviour {
 
     @Override
     public int onEnd() {
-        System.out.println( "ОН ЭНД" + onEndvalue);
+        System.out.println(onEndvalue);
         return onEndvalue; // для тестов
     }
 

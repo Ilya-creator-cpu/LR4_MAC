@@ -19,4 +19,5 @@ public class Distributor extends Agent {
     public void registration(){
         dFhelper.registerAgent(this,"Distribution");
     }
+
 }

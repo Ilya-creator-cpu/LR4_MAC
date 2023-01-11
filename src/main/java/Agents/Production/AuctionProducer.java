@@ -23,6 +23,7 @@ public class AuctionProducer extends Behaviour {
 
     @Override
     public void action() {
+        log.info("Аукцион начался");
 
         MessageTemplate mt = MessageTemplate.or(
                 MessageTemplate.MatchPerformative(ACLMessage.PROPAGATE),
@@ -43,7 +44,7 @@ public class AuctionProducer extends Behaviour {
                 if (opponentPrice < firstPricePower3) {
                     //log.info(getAgent().getLocalName() + "готов снизить цену ");
                     //log.info("Старая цена " + firstPricePower3);
-                    if(opponentPrice > minPricePower3){
+                    if(opponentPrice < minPricePower3){
                         firstPricePower3 = opponentPrice - 3;
                         //  log.info("Новая цена " + firstPricePower3);
 

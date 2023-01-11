@@ -32,7 +32,7 @@ public class DivisionFirst extends Behaviour {
                 log.info(getAgent().getLocalName() + " получил согласие");
 
                 ACLMessage msg = new ACLMessage(ACLMessage.NOT_UNDERSTOOD);                                     //отправка  первого сообщ в тоПик
-                msg.setContent("ВСЮ"+","+receive.getContent());
+                msg.setContent("всю"+","+receive.getContent());
                 msg.addReceiver(new AID(whichAgent, false));
                 getAgent().send(msg);
 

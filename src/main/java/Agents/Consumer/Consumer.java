@@ -39,7 +39,7 @@ public class Consumer extends Agent {
 
         //log.info(hashMap.toString());
 
-        addBehaviour(new SendQuantity(this,35000,data));
+        addBehaviour(new SendQuantity(this,20000,data));
         addBehaviour(new Report(1500.0));
 
     }
